@@ -95,6 +95,7 @@ Write a service provider to register a guzzle instance for future usage. Create 
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use ProEmergotech\Correlate\Correlate;
 use ProEmergotech\Correlate\Guzzle\GuzzleCorrelateMiddleware;
 use GuzzleHttp\Client;
 use GuzzleHttp\HandlerStack;
@@ -107,6 +108,9 @@ class GuzzleHttpClientProvider extends ServiceProvider
 
       // Determine correlation id.
       $cid = $this->app['request']->getCorrelationId(); // If you use proemergotech/correlate-php-laravel middleware
+
+      // identical but without macros
+      $cid = $this->app['request']->headers->get(Correlate::getHeaderName());
 
       $stack = HandlerStack::create(new CurlHandler());
       $stack->push(new GuzzleCorrelateMiddleware($cid));
@@ -149,8 +153,13 @@ $app->bind('guzzle', function () use ($app) {
     // Determine correlation id.
     $cid = $app['request']->getCorrelationId(); // If you use proemergotech/correlate-php-laravel middleware
 
+    // identical but without macros
+    $cid = $this->app['request']->headers->get(
+      \ProEmergotech\Correlate\Correlate::getHeaderName()
+    );
+
     $stack = HandlerStack::create(new CurlHandler());
-    $stack->push(new GuzzleCorrelateMiddleware($cid));
+    $stack->push(new \ProEmergotech\Correlate\Guzzle\GuzzleCorrelateMiddleware($cid));
 
     return new Client([
       'handler' => $stack
