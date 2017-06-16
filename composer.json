@@ -1,0 +1,57 @@
+{
+  "name": "proemergotech/correlate-php-guzzle",
+  "description": "Adds correlation ID to Guzzle requests.",
+  "keywords": [
+  	"microservice",
+  	"uuid",
+  	"dispatcher",
+  	"log",
+  	"correlate",
+  	"laravel",
+  	"lumen",
+  	"psr-7",
+  	"slim",
+    "guzzle"
+  ],
+  "type": "library",
+  "homepage": "https://github.com/proemergotech/correlate-php-guzzle",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "ProEmergotech Kft",
+      "email": "support@proemergotech.com",
+      "homepage": "http://www.proemergotech.com/"
+    },
+    {
+      "name": "Soma Szelpal",
+      "email": "soma.szelpal@proemergotech.com"
+    },
+    {
+	    "name": "Soma Szelpal",
+	    "email": "szelpalsoma@gmail.com"
+  	}
+  ],
+	"require": {
+    "proemergotech/correlate-php-core": "dev-master",
+    "psr/http-message": "^1.0",
+    "guzzlehttp/guzzle": "6.*"
+  },
+  "require-dev": {
+    "fzaninotto/faker": "~1.4",
+    "phpunit/phpunit": "^5.0",
+    "mockery/mockery": "~0.9",
+    "squizlabs/php_codesniffer": "^2.8"
+  },
+  "autoload": {
+    "psr-4": {
+      "ProEmergotech\\Correlate\\Guzzle\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "ProEmergotech\\Correlate\\Guzzle\\Tests\\": "tests/"
+    }
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true
+}
