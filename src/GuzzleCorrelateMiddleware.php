@@ -9,7 +9,7 @@ namespace ProEmergotech\Correlate\Guzzle;
 
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
-use ProEmergotech\Correlate;
+use ProEmergotech\Correlate\Correlate;
 
 class GuzzleCorrelateMiddleware
 {
