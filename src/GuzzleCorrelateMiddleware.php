@@ -55,14 +55,13 @@ class GuzzleCorrelateMiddleware
                 }
             }
 
-            return $handler(function (RequestInterface $request) use ($cid) {
-                if (!$request->hasHeader(Correlate::getHeaderName())) {
-                    return $request->withHeader(
-                        Correlate::getHeaderName(), (string)$cid
-                    );
-                }
-                return $request;
-            }, $options)->then(function (ResponseInterface $response) use ($cid) {
+            if (!$request->hasHeader(Correlate::getHeaderName())) {
+                $request = $request->withHeader(
+                    Correlate::getHeaderName(), (string)$cid
+                );
+            }
+
+            return $handler($request, $options)->then(function (ResponseInterface $response) use ($cid) {
                 /*
                 if (!$response->hasHeader(Correlate::getHeaderName())) {
                     return $response->withHeader(
