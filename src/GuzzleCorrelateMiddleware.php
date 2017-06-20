@@ -34,7 +34,7 @@ class GuzzleCorrelateMiddleware
      */
     public function __invoke(callable $handler)
     {
-        $cid = $this->correlationId();
+        $cid = $this->correlationId;
 
         return function (RequestInterface $request, array $options) use ($handler, $cid) {
 
